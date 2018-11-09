@@ -2,10 +2,10 @@
   "name": "northcoders-news-api",
   "version": "1.0.0",
   "description": "Northcoders News API Sprint",
-  "main": "index.js",
+  "main": "listen.js",
   "scripts": {
     "test": "mocha spec/",
-    "start": "node index.js",
+    "start": "node listen.js",
     "dev": "nodemon listen.js",
     "seed:dev": "node ./seed/seed.dev.js"
   },
