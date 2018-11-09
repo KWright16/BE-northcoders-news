@@ -19,7 +19,7 @@ const getArticleInTopic = (req, res ,next) => {
         }))
     })
     .then(articles => {
-        if (!articles)
+        if (!articles.length)
             return Promise.reject({
                 status: 404, 
                 msg: `Articles not found for topic: ${topic_slug}`

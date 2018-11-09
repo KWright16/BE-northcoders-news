@@ -45,6 +45,14 @@ describe('/api', () => {
                 expect(articles[0].comment_count).to.equal(2)
             })
         });
+        it('GET returns status 404 if given a bad request', () => {    
+            return request
+            .get('/api/topics/pigeons/articles')
+            .expect(404) 
+            .then((res) => {
+                expect(res.body.msg).to.equal('Articles not found for topic: pigeons'); 
+            });
+        });
         it('POST returns status 201 and the posted article', () => {        
             const newArticle = {
                 "title": "new article", 
@@ -94,7 +102,7 @@ describe('/api', () => {
                 expect(res.body.msg).to.equal('Cast to ObjectId failed for value "1234" at path "_id" for model "articles"'); 
             });
         });
-        it('GET returns status 404 if given a bad request', () => {    
+        it('GET returns status 404 if article not found', () => {    
             return request
             .get(`/api/articles/${wrongId}`)
             .expect(404) 
@@ -129,7 +137,7 @@ describe('/api', () => {
                 expect(res.body.msg).to.equal('Cast to ObjectId failed for value "1234" at path "belongs_to" for model "comments"'); 
             });
         });
-        it('GET returns status 404 if given a bad request', () => {    
+        it('GET returns status 404 if article not found', () => {    
             return request
             .get(`/api/articles/${wrongId}/comments`)
             .expect(404) 
@@ -163,4 +171,17 @@ describe('/api', () => {
             });
         });
     });
+    // describe('/users/:username', () => {
+    //     it('GET returns status 200 and the user requested', () => {            
+    //         return request
+    //         .get(`/api/users/${userDocs[0].username}`)
+    //         .expect(200)
+    //         .then(({body: {user}}) => {
+    //             expect(user.name).to.equal(userDocs[0].title);
+    //             // expect(article.body).to.equal(articleDocs[0].body);
+    //             // expect(article.comment_count).to.equal(2);
+
+    //         })
+    //     });
+    // });
 });
