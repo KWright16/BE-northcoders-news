@@ -29,9 +29,6 @@ const seedDB = ({topicData, userData, articleData, commentData}) => {
             Comment.insertMany(formatCommentData(commentData, userRefObj, articleRefObj))
         ])
     })
-    .then(([topicDocs, userDocs, articleDocs, commentDocss]) => {
-        console.log(userDocs[0])
-    })
     .catch(console.log)   
 }
 

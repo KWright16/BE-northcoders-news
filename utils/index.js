@@ -23,7 +23,6 @@ const formatArticleData = (articleData, userRefObj) => {
     })
 }
 const formatCommentData = (commentData, userRefObj, articleRefObj) => {
-    // a belongs_to property that references the specific article's mongo _id.
     return commentData.map(commentDatum => {
         return {
             ...commentDatum,
@@ -32,4 +31,5 @@ const formatCommentData = (commentData, userRefObj, articleRefObj) => {
         }
     })
 }
+
 module.exports = { generateRefObj, generateCommentRefObj, formatArticleData, formatCommentData }
