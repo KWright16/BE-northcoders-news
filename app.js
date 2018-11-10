@@ -11,7 +11,7 @@ mongoose.connect(DB_URL)
 
 app.use(bodyParser.json());
 
-// app.set('views', '/views');
+app.set('view engine', 'ejs');
 
 app.use('/api', apiRouter);
 

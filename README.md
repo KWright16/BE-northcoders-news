@@ -29,7 +29,7 @@ const ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev'
 const dbURL= {
     dev : 'mongodb://localhost:27017/northcoders_news',
     test : 'mongodb://localhost:27017/northcoders_news_test',
-    production: 'mongodb://kate:password1@ds155833.mlab.com:55833/ncnews'
+    production: 'mongodb://<username>:<password>@ds155833.mlab.com:55833/ncnews'
 } 
 module.exports = dbURL[ENV]
 ```
@@ -126,6 +126,12 @@ Tests are provided to check that the responses are being served up correctly aft
 
 Tests are also provided to check that the comment counts are working correctly.
 
+## Hosting
+
+This API is hosted on Heroku on the followinig link, while the database is hosted on MLab
+```
+https://young-savannah-18120.herokuapp.com
+```
 
 
 
