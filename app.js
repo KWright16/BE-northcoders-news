@@ -11,6 +11,8 @@ mongoose.connect(DB_URL)
 
 app.use(bodyParser.json());
 
+// app.set('views', '/views');
+
 app.use('/api', apiRouter);
 
 app.use('/*', (req, res, next) => {

@@ -1,58 +1,45 @@
-## Northcoders News API
+# NC News
 
-### Background
+An api that serves up articles, users, topics and and comments for a news site
 
-We will be building the API which to use in the Northcoders News Sprint during the Front End block of the course.
+## Getting Started
 
-Our database will be MongoDB. Your Mongoose models have been created for you so that you can see what the data should look like.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Mongoose Documentation
+### Prerequisites
 
-The below are some of the model methods that you can call on your models.
+You will need to install express, body-parser and mongoose by running the following on the command line.
+```
+$ npm install <item to install>
+```
 
-* [find](http://mongoosejs.com/docs/api.html#model_Model.find)
-* [findOne](http://mongoosejs.com/docs/api.html#model_Model.findOne)
-* [findOneAndUpdate](http://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate)
-* [findOneAndRemove](http://mongoosejs.com/docs/api.html#model_Model.findOneAndRemove)
-* [findById](http://mongoosejs.com/docs/api.html#model_Model.findById)
-* [findByIdAndUpdate](http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate)
-* [findByIdAndRemove](http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove)
-* [update](http://mongoosejs.com/docs/api.html#model_Model.update)
-* [create](https://mongoosejs.com/docs/api.html#model_Model.create)
-* [remove](http://mongoosejs.com/docs/api.html#model_Model-remove)
-* [save](http://mongoosejs.com/docs/api.html#model_Model-save)
-* [count](http://mongoosejs.com/docs/api.html#model_Model.count)
-* [populate](https://mongoosejs.com/docs/api.html#model_Model.populate)
+To run the test for this api you will also need to inistall chai mocha and supertest
 
-### Step 1 - Seeding
+Type the following into the command line
 
-Data has been provided for both testing and development environments so you will need to write a seed function to seed your database. You should think about how you will write your seed file to use either test data or dev data depending on the environment that you're running in.
+```
+$ npm install mocha chai supertest
+```
 
-1.  You will need to seed the topics and users, followed by the articles and comments. 
-
-* Each article should have:
-  * a `belongs_to` property, that references a topic's `slug`, and 
-  * a `created_by` property that references a user's mongo `_id`. 
-* Each comment should have:
-  * a `created_by` property that references a user's mongo `_id` and 
-  * a `belongs_to` property that references the specific article's mongo `_id`.
-
-### Step 2 - Building and Testing
-
-1.  Build your Express App
-2.  Mount an API Router onto your app
-3.  Define the routes described below
-4.  Define controller functions for each of your routes (remember to use `.populate` for `created_by` and `belongs_to` fields that are mongo ids! This will be extremely useful when you are working on the front-end!)
-5.  You will also need to return a `comment_count` property on all your endpoints that return articles. Attempt it on a single article first, then apply it to your all articles endpoint and finally your post new article. This is a great challenge to help consolidate your understanding of promises. (Note: do __not__ change the models to have a `comment_count` value in the database!)
-6.  Use proper project configuration from the offset, being sure to treat development and test differently.
-7.  Test each route as you go. Remember to test the happy and the unhappy paths! Make sure your error messages are helpful and your error status codes are chosen correctly. Remember to seed the test database using the seeding function and make the saved data available to use within your test suite.
+You will also need to set up the following config file:
 
 
-**HINT** Make sure to drop and reseed your test database with every test. This will make it much easier to keep track of your data throughout. In order for this to work, you are going to need to keep track of the MongoIDs your seeded docs have been given. In order to do this, you might want to consider what your seed file returns, and how you can use this in your tests.
+```
+const ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev'
+const dbURL= {
+    dev : 'mongodb://localhost:27017/northcoders_news',
+    test : 'mongodb://localhost:27017/northcoders_news_test',
+    production: 'mongodb://kate:password1@ds155833.mlab.com:55833/ncnews'
+} 
+module.exports = dbURL[ENV]
+```
 
-### Routes
+To do this create a file called config.js in the main directory and copy in the above code
 
-Your server should have the following end-points:
+### Using the API
+
+The following end points are served up by the api. Type the following urls into either a browser or postman to access the data.
+All relavents linked data will also be attached, for example when an article belongs to a topic the topic will also be included in the response.
 
 ```http
 GET /api 
@@ -61,18 +48,18 @@ GET /api
 
 ```http
 GET /api/topics
-# Get all the topics
+# Gets all the topics
 ```
 
 ```http
 GET /api/topics/:topic_slug/articles
-# Return all the articles for a certain topic
+# Returns all the articles for a certain topic
 # e.g: `/api/topics/football/articles`
 ```
 
 ```http
 POST /api/topics/:topic_slug/articles
-# Add a new article to a topic. This route requires a JSON body with title and body key value pairs
+# Adds a new article to a topic. This route requires a JSON body with title and body key value pairs
 # e.g: `{ "title": "new article", "body": "This is my new article content", "created_by": "user_id goes here"}`
 ```
 
@@ -83,30 +70,24 @@ GET /api/articles
 
 ```http
 GET /api/articles/:article_id
-# Get an individual article
+# Gets an individual article
 ```
 
 ```http
 GET /api/articles/:article_id/comments
-# Get all the comments for a individual article
+# Gets all the comments for a individual article
 ```
 
 ```http
 POST /api/articles/:article_id/comments
-# Add a new comment to an article. This route requires a JSON body with body and created_by key value pairs
+# Adds a new comment to an article. This route requires a JSON body with body and created_by key value pairs
 # e.g: `{"body": "This is my new comment", "created_by": "user_id goes here"}`
 ```
 
 ```http
 PATCH /api/articles/:article_id
-# Increment or Decrement the votes of an article by one. This route requires a vote query of 'up' or 'down'
+# Increments or Decrements the votes of an article by one. This route requires a vote query of 'up' or 'down'
 # e.g: `/api/articles/:article_id?vote=up`
-```
-
-```http
-PATCH /api/comments/:comment_id
-# Increment or Decrement the votes of a comment by one. This route requires a vote query of 'up' or 'down'
-# e.g: `/api/comments/:comment_id?vote=down`
 ```
 
 ```http
@@ -120,14 +101,31 @@ GET /api/users/:username
 # Returns a JSON object with the profile data for the specified user.
 ```
 
-NOTE: When it comes to building your front end you'll find it extremely useful if your POST comment endpoint returns the new comment with the created_by property populated with the corresponding user object.
+All get requests that serve up artices also supply a comment count
 
-### Step 3 - Hosting
+## Running the tests
 
-Once you are happy with your seed/dev file, prepare your project for production. You will need to seed the development data to mLab, and host the API on Heroku. If you've forgotten how to do this, you may want to look at this tutorial! https://www.sitepoint.com/deploy-rest-api-in-30-mins-mlab-heroku/
+To run the tests type
+```
+npm test
+```
+ into the command line.
+ 
+### Test break down
 
-### Step 4 - Preparing for your review and portfolio
+```
+GET
+```
 
-Finally, you should write a README for this project (and remove this one). The README should be broken down like this: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+These tests test that the controllers serve up the relavent end points. Tests are also provided to check that errors are being handled appropraitely. Tests are supplied to test handling of 400 'bad requests' and 404 'item not found'.
 
-It should also include the link where your herokuapp is hosted.
+```
+POST PATCH DELETE
+```
+Tests are provided to check that the responses are being served up correctly after the relevent action has completed
+
+Tests are also provided to check that the comment counts are working correctly.
+
+
+
+

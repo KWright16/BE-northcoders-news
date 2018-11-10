@@ -21,6 +21,19 @@ describe('/api', () => {
         console.log('done')
         return mongoose.disconnect();
     })
+    // describe('/', () => {
+    //     it.only('GET returns status 200 and a html page of endpoints', () => {
+    //         return request
+    //         .get('/api')
+    //         .expect(200)
+    //         .then((res) => {
+    //             expect(res.body).to.equal(3);
+    //             // expect(topics[0].title).to.equal(topicDocs[0].title);
+    //             // expect(topics[1].slug).to.equal(topicDocs[1].slug);
+    //         })
+
+    //     });
+    // });
     describe('/topics', () => {
         it('GET returns status 200 an array of all the topics', () => {
             return request
