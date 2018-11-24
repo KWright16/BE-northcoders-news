@@ -4,33 +4,24 @@ An api that serves up articles, users, topics and and comments for a news site
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-You will need to install express, body-parser and mongoose by running the following on the command line.
-```
-$ npm install <item to install>
-```
-
-To run the test for this api you will also need to inistall chai mocha and supertest
-
-Type the following into the command line
+You will need to install the prerequisites for running and testing the application by running the following on the command line.
 
 ```
-$ npm install mocha chai supertest
+$ npm install
 ```
 
 You will also need to set up the following config file:
-
 
 ```
 const ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev'
 const dbURL= {
     dev : 'mongodb://localhost:27017/northcoders_news',
     test : 'mongodb://localhost:27017/northcoders_news_test',
-    production: 'mongodb://<username>:<password>@ds155833.mlab.com:55833/ncnews'
-} 
+}
 module.exports = dbURL[ENV]
 ```
 
@@ -39,10 +30,10 @@ To do this create a file called config.js in the main directory and copy in the 
 ### Using the API
 
 The following end points are served up by the api. Type the following urls into either a browser or postman to access the data.
-All relavents linked data will also be attached, for example when an article belongs to a topic the topic will also be included in the response.
+All relevant linked data will also be attached, for example when an article belongs to a topic the topic will also be included in the response.
 
 ```http
-GET /api 
+GET /api
 # Serves an HTML page with documentation for all the available endpoints
 ```
 
@@ -101,37 +92,37 @@ GET /api/users/:username
 # Returns a JSON object with the profile data for the specified user.
 ```
 
-All get requests that serve up artices also supply a comment count
+All get requests that serve up articles also supply a comment count
 
 ## Running the tests
 
 To run the tests type
+
 ```
 npm test
 ```
- into the command line.
- 
+
+into the command line.
+
 ### Test break down
 
 ```
 GET
 ```
 
-These tests test that the controllers serve up the relavent end points. Tests are also provided to check that errors are being handled appropraitely. Tests are supplied to test handling of 400 'bad requests' and 404 'item not found'.
+These tests test that the controllers serve up the relevant end points. Tests are also provided to check that errors are being handled appropriately. Tests are supplied to test handling of 400 'bad requests' and 404 'item not found'.
 
 ```
 POST PATCH DELETE
 ```
-Tests are provided to check that the responses are being served up correctly after the relevent action has completed
 
+Tests are provided to check that the responses are being served up correctly after the relevent action has completed
 Tests are also provided to check that the comment counts are working correctly.
 
 ## Hosting
 
-This API is hosted on Heroku on the followinig link, while the database is hosted on MLab
+This API is hosted on Heroku on the following link, while the database is hosted on MLab
+
 ```
 https://young-savannah-18120.herokuapp.com
 ```
-
-
-

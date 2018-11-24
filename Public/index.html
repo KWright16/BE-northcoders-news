@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NC News</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>NC News</h1>
+    <p>GET /api/topics<br>
+        Serves up all the topics<br>
+        <br>
+        GET /api/topics/:topic_slug/articles<br>
+        Serves up all the articles for a certain topic<br>
+        <br>
+        POST /api/topics/:topic_slug/articles<br>
+        Adds a new article to a topic. <br>
+        <br>
+        GET /api/articles<br>
+        Serves up all the articles<br>
+        <br>
+        GET /api/articles/:article_id<br>
+        Serves up an individual article<br>
+        <br>
+        GET /api/articles/:article_id/comments<br>
+        Serves up all the comments for a individual article<br>
+        <br>
+        POST /api/articles/:article_id/comments<br>
+        Adds a new comment to an article. <br>
+        <br>
+        PUT /api/articles/:article_id<br>
+        Increments or Decrements the votes of an article by one. This route requires a vote query of 'up' or 'down'<br>
+        <br>
+        PUT /api/comments/:comment_id<br>
+        Increments or Decrements the votes of a comment by one. This route requires a vote query of 'up' or 'down'<br>
+        <br>
+        DELETE /api/comments/:comment_id<br>
+        Deletes a comment<br>
+        <br>
+        GET /api/users/:username<br>
+        Serves up all the users</p>
+</body>
+</html>
