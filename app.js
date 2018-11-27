@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const apiRouter = require("./routes/api");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const DB_URL =
   process.env.NODE_ENV === "production"
     ? process.env.DB_URL
@@ -13,6 +14,8 @@ mongoose.connect(DB_URL).then(() => {
 });
 
 app.use(bodyParser.json());
+
+app.use(cors());
 
 // app.use("/api", express.static(__dirname + "/public"));
 
