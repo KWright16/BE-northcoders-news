@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-// app.use("/api", express.static(__dirname + "/public"));
+app.use("/api", express.static("public"));
 
 app.use("/api", apiRouter);
 

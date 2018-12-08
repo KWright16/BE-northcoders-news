@@ -30,10 +30,4 @@ const ArticleSchema = new Schema({
   }
 });
 
-// ArticleSchema.virtual("topicArticles", {
-//   ref: "Topic",
-//   localField: "belongs_to",
-//   foreignField: "slug"
-// });
-// in topics get article in topic .populate('topicArticles)
 module.exports = mongoose.model("articles", ArticleSchema);
